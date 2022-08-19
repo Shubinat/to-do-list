@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="ToDoList.WPF.Views.ToDoListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ToDoList.WPF.Views" xmlns:components="clr-namespace:ToDoList.WPF.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding HasErrorMessage}" Value="True">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            
+            <Grid>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsLoading}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    <TextBlock Text="Loading To Do List..." FontSize="16" TextAlignment="Center"/>
+                    <ProgressBar  Width="250" IsIndeterminate="True">
+                        <ProgressBar.Style>
+                            <Style TargetType="ProgressBar">
+                                <Setter Property="Foreground" Value="#FF63019D"/>
+                            </Style>
+                        </ProgressBar.Style>
+                    </ProgressBar>
+                </StackPanel>
+            </Grid>
+            <Grid>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsLoading}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="75"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" Margin="5 0 0 0" VerticalAlignment="Center">
+                    <Border Background="#FF63019D" Padding="2 0" CornerRadius="1">
+                        <TextBlock FontSize="26" Text="To Do" VerticalAlignment="Center" Foreground="White"/>
+                    </Border>
+                    <TextBlock FontSize="26" Foreground="#FF63019D" Text="List" VerticalAlignment="Center" Margin="5 0 0 0"/>
+
+                </StackPanel>
+                <Border Grid.Row="1" Margin="5" BorderThickness="1" CornerRadius="3" BorderBrush="LightGray">
+                    <components:NotesListing DataContext="{Binding NotesListingViewModel}" />
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" Padding="10 5 5 5" Margin="5" BorderThickness="1" CornerRadius="3" BorderBrush="LightGray">
+                    <components:NotesDetails DataContext="{Binding NotesDetailsViewModel}"/>
+                </Border>
+
+                <Button Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Add" Padding="10 5" Margin="5" Command="{Binding AddCommand}"
+                 Foreground="White" FontWeight="Bold" Width="100" Style="{StaticResource MainButton}"/>
+            </Grid>
+
+        </Grid>
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding HasErrorMessage}" Value="False">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" FontSize="16" VerticalAlignment="Center" TextAlignment="Center"/>
+        </Grid>
+    </Grid>
+</UserControl>

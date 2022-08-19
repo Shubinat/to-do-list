@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <PackageIcon>favicon.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="..\..\..\Downloads\favicon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToDoList.Domain\ToDoList.Domain.csproj" />
+    <ProjectReference Include="..\ToDoList.EntityFramework\ToDoList.EntityFramework.csproj" />
+  </ItemGroup>
+
+</Project>
