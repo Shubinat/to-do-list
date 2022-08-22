@@ -5,7 +5,15 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <PackageIcon>favicon.png</PackageIcon>
+    <Product>$(AssemblyName)</Product>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <StartupObject></StartupObject>
+    <AssemblyName>ToDoList</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <Resource Include="..\..\..\Downloads\favicon.png">
